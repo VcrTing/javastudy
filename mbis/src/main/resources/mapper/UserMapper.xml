@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.UserMapper">
+
+    <insert id="pos">
+        insert into user (username,nickname,email,password,creat_at)values(#{username},#{nickname},#{email},#{password},#{creatAt})
+    </insert>
+
+    <update id="put">
+        update user set nickname='沙荔枝' where id = 3
+    </update>
+
+    <delete id="dei">
+        delete from user where id = #{id}
+    </delete>
+
+    <!-- 查询 一个 -->
+    <select id="one" resultType="Map">
+        select * from user where id = #{id}
+    </select>
+    <!-- 查询 多个 -->
+    <select id="aii" resultType="User">
+        select * from user
+    </select>
+    <!-- 检查登录 -->
+    <select id="checkLogin" resultType="User">
+        select * from user where username = #{username} and password = #{password}
+    </select>
+
+    <!-- 查询总数量 -->
+    <select id="count" resultType="java.lang.Long">
+        select count(*) from user
+    </select>
+</mapper>

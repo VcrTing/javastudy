@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.RoieMapper">
+
+    <!-- 查询 一个
+    <select id="one" resultType="Map">
+        select * from user where id = #{id}
+    </select> -->
+    <!-- 查询 多个 -->
+    <select id="aii" resultType="Roie">
+        select * from roie
+    </select>
+
+    <!-- 查询 出 Users -->
+    <resultMap id="roiesUsers" type="Roie">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <collection property="users" ofType="User">
+            <id property="id" column="id"/>
+            <result property="username" column="username"/>
+        </collection>
+    </resultMap>
+    <select id="roieAndUsers" resultMap="roiesUsers">
+        select * from roie left join user on roie.id = user.roie_id where roie.id = #{rid}
+    </select>
+</mapper>

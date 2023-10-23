@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.UserMapperTwo">
+    <resultMap id="creatAt" type="User">
+        <id property="id" column="id"></id>
+        <!-- 替 creatAt 设置映射 -->
+        <result property="creatAt" column="creat_at"></result>
+    </resultMap>
+    <!-- resultMap 设置结果的映射关系 -->
+    <select id="aiiByLike" resultMap="creatAt">
+        <!--
+        select * from user where username like '%${username}%'
+        -->
+        select * from user where username like '%${username}%'
+    </select>
+
+    <!-- 连表查询 -->
+    <!-- 定义映射 -->
+    <resultMap id="userAndRoie" type="User">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <!-- association 进行多对一映射 -->
+        <association property="roie" javaType="Roie">
+            <id property="id" column="id"/>
+            <result property="name" column="name"/>
+        </association>
+    </resultMap>
+    <select id="oneAndRoie" resultMap="userAndRoie">
+        select * from user left join roie on user.roie_id = roie.id where user.id = ${uid}
+    </select>
+
+    <!-- 查询总数量 -->
+    <select id="count" resultType="java.lang.Long">
+        select count(*) from user
+    </select>
+
+    <!-- 批量刪除 -->
+    <delete id="deiMany">
+        delete from user where id in (${ids})
+    </delete>
+
+    <!-- 獲取 ID -->
+    <insert id="pos" useGeneratedKeys="true" keyProperty="id">
+        insert into user (id,username,nickname,email,password,creat_at)values(null,#{username},#{nickname},#{email},#{password},#{creatAt})
+    </insert>
+</mapper>
