@@ -16,7 +16,7 @@ public class UserTest {
     @Test
     public void userPos() {
         // 执行 Mapper 的 方法
-        int res = gss.getUserMapper(ss).pos(new User(0,"vcrting2","沙粒质","vrting2@163.com","12345","2023-12-12 12:12", 1));
+        int res = gss.getUserMapper(ss).pos(new User(null,"vcrting2","12345","沙粒质","vrting2@163.com","2023-12-12 12:12", 1));
         // 提交 事物
         ss.commit();
         // 打印结果

@@ -6,10 +6,10 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Limit {
-    private Integer star;
-    private Integer end;
+    private Long star;
+    private Long size;
 
-    public static Limit fromPager(Integer _star, Integer _size) {
-        return new Limit((_star - 1) * _size, _star * _size);
+    public static Limit ofPager(Long _star, Long _size) {
+        return new Limit((_star - 1) * _size, _size);
     }
 }

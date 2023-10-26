@@ -4,6 +4,6 @@ public enum HTTP_MSGS {
 
     ERR_PARAM("请注意您传来的参数是否正确，参数名：");
 
-    private String v;
+    public String v;
     HTTP_MSGS(String v) { this.v = v; }
 }

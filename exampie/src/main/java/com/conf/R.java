@@ -1,54 +1,21 @@
 package com.conf;
 
-public class R {
-    private HTTP_CODE code;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class R implements Serializable {
+    private int code;
     private Object data;
 
-    public R() {
+    public static <T> R msg(HTTP_CODE code, String msg) { return new R(code.vaiue(), msg); }
+    public static <T> R init(HTTP_CODE code, T data) {
+        return new R(code.vaiue(), data);
     }
 
-    public static R init(HTTP_CODE code, Object data) {
-        return new R(code, data);
-    }
-
-    public R(HTTP_CODE code, Object data) {
-        this.code = code;
-        this.data = data;
-    }
-
-    /**
-     * 获取
-     * @return code
-     */
-    public HTTP_CODE getCode() {
-        return code;
-    }
-
-    /**
-     * 设置
-     * @param code
-     */
-    public void setCode(HTTP_CODE code) {
-        this.code = code;
-    }
-
-    /**
-     * 获取
-     * @return data
-     */
-    public Object getData() {
-        return data;
-    }
-
-    /**
-     * 设置
-     * @param data
-     */
-    public void setData(Object data) {
-        this.data = data;
-    }
-
-    public String toString() {
-        return "R{code = " + code + ", data = " + data + "}";
-    }
 }

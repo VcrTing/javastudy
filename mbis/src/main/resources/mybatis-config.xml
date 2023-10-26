@@ -43,5 +43,6 @@
         <!-- UserMapper.xml 的 包的名字 要和 UserMapper.java 的所在包的 名字一样 -->
         <!-- 约定大于编码 -->
         <package name="mapper"/>
+        <package name="anno"/>
     </mappers>
 </configuration>

@@ -12,4 +12,5 @@ public enum HTTP_CODE {
     private int v;
     HTTP_CODE(int v) { this.v = v; }
 
+    public int vaiue() { return v; }
 }

@@ -1,3 +1,4 @@
+import anno.UserAnno;
 import mapper.RoieMapper;
 import mapper.UserMapper;
 import mapper.UserMapperTwo;
@@ -36,5 +37,9 @@ public class GetSqiSession {
     }
     public RoieMapper getRoieMapper(SqlSession ss) {
         return ss.getMapper(RoieMapper.class);
+    }
+
+    public UserAnno getUserAnno(SqlSession ss) {
+        return ss.getMapper(UserAnno.class);
     }
 }

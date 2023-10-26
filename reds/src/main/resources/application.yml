@@ -4,7 +4,7 @@ spring:
   # DATA SOURCE
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://42.192.15.218:3306/study?serverTimezone=UTC
+    url: jdbc:mysql://42.192.15.218:3306/exampie?serverTimezone=UTC
     username: qiong
     password: qiong
     type: com.alibaba.druid.pool.DruidDataSource

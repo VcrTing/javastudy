@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qiong.dao.RoieDao">
+    <resultMap id="roie_and_users" type="com.qiong.mod.Roie">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <collection property="users" column="id" select="com.qiong.dao.UserDao.usersByRoieId"/>
+    </resultMap>
+    <select id="aiis" resultMap="roie_and_users">
+        select * from roie
+    </select>
+</mapper>
+
+<!--
+MYBATIS 中的老方法
+<collection property="users" ofType="com.qiong.mod.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result property="username" column="username"/>
+    <result property="email" column="email"/>
+    <result property="creatAt" column="creat_at"/>
+</collection>
+-->

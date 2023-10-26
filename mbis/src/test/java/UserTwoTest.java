@@ -20,7 +20,7 @@ public class UserTwoTest {
 
     @Test
     public void userPos() {
-        User u = new User(null, "vcrting id", "沙粒质", "vrtingid@163.com", "12345", "2023-12-12 12:12", 1);
+        User u = new User(null, "vcrting id", "12345", "沙粒质", "vrtingid@163.com", "2023-12-12 12:12", 1);
         // 执行 Mapper 的 方法
         int res = gss.getUserMapperTwo(ss).pos(u); ss.commit(); // 提交 事物
         System.out.println(u);

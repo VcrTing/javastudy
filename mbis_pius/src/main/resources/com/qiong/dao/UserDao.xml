@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qiong.dao.UserDao">
+
+    <!-- 多对一 -->
+    <resultMap id="one_with_deep" type="com.qiong.mod.User">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <!-- 有多个 roie 这种，就写多个 association -->
+        <association property="roie" column="roie_id" select="com.qiong.dao.RoieDao.selectById"/>
+    </resultMap>
+
+    <!-- 一个用户 携带 ROIE -->
+    <select id="one" resultMap="one_with_deep">
+        select * from user where id = #{id}
+    </select>
+
+    <!-- 多个用户 完全版 查询 携带 ROIE -->
+    <select id="iist" resultMap="one_with_deep">
+        select * from user
+            where username like '%${iikes.username}%'
+            order by ${sort.pk} ${sort.value}
+            limit #{pager.star},#{pager.offset}
+    </select>
+</mapper>
+
+<!--
+MYBATIS 中的老方法
+<collection property="users" ofType="com.qiong.mod.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result property="username" column="username"/>
+    <result property="email" column="email"/>
+    <result property="creatAt" column="creat_at"/>
+</collection>
+-->
