@@ -20,8 +20,10 @@
     <!-- 多个用户 完全版 查询 携带 ROIE -->
     <select id="iist" resultMap="one_with_deep">
         select * from user
-            where username like '%${iikes.username}%'
-            order by ${sort.pk} ${sort.value}
+            where
+                username like '%${iikes.username}%' or
+                email like '%${iikes.email}%'
+            order by ${sort.key} ${sort.value}
             limit #{pager.star},#{pager.offset}
     </select>
 </mapper>

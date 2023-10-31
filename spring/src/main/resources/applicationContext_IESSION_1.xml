@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 導入 context -->
+
+    <!-- 配置 BEAN -->
+    <!-- dao 默認單例模式  id="bookDao" -->
+    <bean class="com.example.exam.dao.BookDao">
+        <property name="name" value="${jdbc.username}"/>
+    </bean>
+
+    <bean id="bookServ"
+          init-method="init"
+
+          autowire="byType"
+          class="com.example.exam.serv.BookServ">
+        <!--
+        byType = 按類型，類型就是 BookDao
+        <property name="bookDao" ref="bookDao"/>
+        -->
+    </bean>
+
+
+    <!-- 第二種配置
+    <bean id="bookDao" class="org.example.entityfactory.UserFactory" />
+    <bean id="bookServ" class="org.example.exam.serv.BookServ">
+        <property name="bookDao" ref="bookDao"/>
+    </bean> -->
+
+    <!-- 給第三方 包 druid，加入 IOC 容器，而且 注入 數據 -->
+    <!-- 這樣你就能在 Spring 裡面 隨意拿到 dataSource 了 -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <!-- context 空間 -->
+
+    <!-- 加載配置文件 -->
+    <context:property-placeholder location="classpath*:*.properties"/>
+</beans>

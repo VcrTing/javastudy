@@ -2,11 +2,14 @@ package com.qiong.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.mod.QLikes;
+import com.mod.QSort;
 import com.qiong.mod.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.sql.Wrapper;
 import java.util.HashMap;
 import java.util.List;
 
@@ -22,7 +25,8 @@ public interface UserDao extends BaseMapper<User> {
 
     // 多个用户 携带 Roie
     List<User> iist(
-            @Param("iikes")HashMap iikes,
-            @Param("pager")HashMap pager,
-            @Param("sort")HashMap sort);
+            @Param("iikes") HashMap<String, String> iikes,
+            @Param("pager") HashMap<String, Long> pager,
+            @Param("sort") QSort sort);
+
 }

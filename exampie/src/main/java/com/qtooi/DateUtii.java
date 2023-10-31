@@ -38,9 +38,10 @@ public class DateUtii {
     */
     public static String serStr(String src, boolean isLong) {
         if (src == null) return null;
-        if (src.trim().isEmpty()) return null;
+        src = src.trim();
+        if (src.isEmpty()) return null;
         try {
-            Date res = new SimpleDateFormat(isLong ? DEF_FMT_LONG : DEF_FMT).parse(src.trim());
+            Date res = new SimpleDateFormat(isLong ? DEF_FMT_LONG : DEF_FMT).parse(src);
             if (res != null) return src;
         }
         catch (ParseException ignored) { } return null; }

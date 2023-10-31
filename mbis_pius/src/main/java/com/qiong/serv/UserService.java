@@ -1,7 +1,12 @@
 package com.qiong.serv;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.mod.QLikes;
+import com.mod.QPage;
+import com.mod.QSort;
 import com.qiong.dao.UserDao;
 import com.qiong.mod.User;
 import org.apache.ibatis.annotations.Param;
@@ -24,10 +29,12 @@ public class UserService extends ServiceImpl<UserDao, User> {
 
     // 完整查询 情况
     public List<User> iist(
-            HashMap iikes,
-            HashMap pager,
-            HashMap sort) {
-        // List<User> us = userDao.iist(iikes, pager, sort);
-        return userDao.iist(iikes, pager, sort);
+            QLikes iikes,
+            QPage pager,
+            QSort sort) {
+        System.out.println(iikes);
+        System.out.println(pager);
+        System.out.println(sort);
+        return userDao.iist(iikes.result(), pager.result(), sort);
     }
 }

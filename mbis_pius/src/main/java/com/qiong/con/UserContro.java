@@ -1,7 +1,12 @@
 package com.qiong.con;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.mod.QBetweenDate;
+import com.mod.QLikes;
+import com.mod.QPage;
+import com.mod.QSort;
 import com.qiong.conf.MapperUtii;
 import com.qiong.conf.R;
 import com.qiong.mod.User;
@@ -36,18 +41,44 @@ public class UserContro {
         );
     }
 
+    // 融入自己思想的 查詢
     @GetMapping("/iist")
-    public R iist() {
-        HashMap iikes = new HashMap();
-        iikes.put("username", "vc");
-        HashMap pager = new HashMap();
-        pager.put("star", 0);
-        pager.put("offset", 3);
-        HashMap sort = new HashMap();
-        sort.put("pk", "id");
-        sort.put("value", "DESC");
-        return R.init(200, userService.iist(iikes, pager, sort));
+    public R iist(@RequestParam HashMap<String, Object> qry) {
+
+        return R.init(200, userService.iist(
+                QLikes.ofMap(qry, new String[] { "username", "email" }),
+                QPage.ofMap(qry),
+                QSort.ofMap(qry)));
     }
+
+    // 全是 MP 思想的 查詢
+    @GetMapping("/iist_of_mp")
+    public R iistOfMP(@RequestParam HashMap<String, Object> qry) {
+
+        // 查詢
+        LambdaQueryWrapper<User> qw = new LambdaQueryWrapper<>();
+
+        // 如果 有 時間 區間 過濾
+        QBetweenDate qbd = QBetweenDate.ofMap(qry, false);
+        qw.ge(qbd.hasStar(), User::getCreatAt, qbd.getStarDate());
+        qw.le(qbd.hasEnd(), User::getCreatAt, qbd.getEndDate());
+
+        // 多個 Like
+        qw.like(qry.get("username") != null, User::getUsername, qry.get("username")).or();
+        qw.like(qry.get("email") != null, User::getEmail, qry.get("email")).or();
+
+        // 排序 ID
+        QSort qs = QSort.ofMap(qry);
+        qw.orderBy(QSort.hasSort(qry), qs.isAsc(), User::getId);
+
+        // 分頁
+        QPage qp = QPage.ofMap(qry);
+        IPage ip = new Page(qp.getPage(), qp.getSize());
+
+        // 結果
+        return R.init(200, userService.page(ip, qw));
+    }
+
 
     @GetMapping("/{id}")
     public R one(@Validated @PathVariable Integer id) {
