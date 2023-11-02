@@ -1,0 +1,17 @@
+
+spring:
+  application:
+    name: securityEasy
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://42.192.15.218:3306/exampie?serverTimezone=UTC
+    username: qiong
+    password: qiong
+    # type: com.alibaba.druid.pool.DruidDataSource
+  security:
+    user:
+      name: admin
+      password: admin
+      roles: ONE
+server:
+  port: 80

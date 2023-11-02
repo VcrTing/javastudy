@@ -2,7 +2,7 @@ package com.exampie.serv;
 
 import com.alibaba.druid.util.StringUtils;
 import com.exampie.dao.RoieDao;
-import com.exampie.entity.Roie;
+import org.example.entity.Roie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

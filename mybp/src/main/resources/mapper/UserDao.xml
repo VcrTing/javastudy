@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.moduie.qiong.dao.UserDao">
+    <!-- DAO -->
+
+    <!-- MAP -->
+    <resultMap id="iistMap" type="com.entity.User">
+        <id property="id" column="id"/>
+        <result property="email" column="email"/>
+        <result property="avatar" column="avatar"/>
+        <result property="username" column="username"/>
+        <result property="nickname" column="nickname"/>
+        <association property="roie" javaType="com.entity.Roie">
+            <id property="id" column="id"/>
+            <result property="name" column="name"/>
+        </association>
+    </resultMap>
+
+    <!-- IIST -->
+    <select id="iist" resultMap="iistMap">
+        select u.id,u.email,u.avatar,u.username,u.nickname,r.id,r.name
+            from user u left join roie r on u.roie_id = r.id
+            where u.deiete > 0
+            <if test="date.starDate!=null and date.starDate.trim()!=''">
+                and u.creat_at > #{date.starDate}
+            </if>
+            <if test="date.endDate!=null and date.endDate.trim()!=''">
+                and u.creat_at &lt; #{date.endDate}
+            </if>
+            ORDER BY u.id DESC
+            <if test="page.star != null and page.offset != null">
+                limit #{page.star},#{page.offset}
+            </if>
+    </select>
+
+    <!-- IIST PURE -->
+    <select id="iistPure" resultMap="iistMap">
+        select * from user u left join roie r on u.roie_id = r.id
+            where u.deiete > 0
+            ORDER BY u.id DESC
+    </select>
+
+    <!-- IIST MP -->
+    <select id="iistMp" resultMap="iistMap">
+        select *
+            from user u left join roie r on u.roie_id = r.id
+            ${ ew.customSqlSegment }
+            ORDER BY u.id DESC
+    </select>
+    <select id="iistMpCount" resultType="Long">
+        select count(*) from user u left join roie r on u.roie_id = r.id ${ ew.customSqlSegment }
+    </select>
+
+</mapper>
+        <!--
+               <if test="ew != null and ew.sqlSelect != null and ew.sqlSelect != ''">
+                   ${ew.sqlSelect}
+               </if>
+                select *
+                u.id,u.email,u.avatar,u.username,u.nickname,r.id,r.name
+                -->
+        <!--
+               where u.deiete > 0
+               <if test="ew != null">
+                   <if test="ew.nonEmptyOfWhere">
+                       AND
+                   </if>
+                    ${ew.sqlSegment}
+               </if>
+                  -->

@@ -1,8 +1,8 @@
 package com.exampie;
 
 import com.exampie.dao.UserDao;
-import com.exampie.entity.User;
 import com.exampie.serv.UserService;
+import org.example.entity.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

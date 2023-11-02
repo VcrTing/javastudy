@@ -1,7 +1,8 @@
 package com.exampie.serv;
 
 import com.exampie.dao.BookDao;
-import com.exampie.entity.Book;
+
+import org.example.entity.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

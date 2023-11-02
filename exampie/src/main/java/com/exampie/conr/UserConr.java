@@ -1,10 +1,8 @@
 package com.exampie.conr;
 
 import com.alibaba.druid.util.StringUtils;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.conf.HTTP_CODE;
-import com.conf.HTTP_MSGS;
 import com.conf.R;
 import com.exampie.conr.basic.UserConrBasic;
 import com.exampie.entity.Roie;
@@ -13,14 +11,11 @@ import com.exampie.serv.RoieService;
 import com.exampie.serv.UserService;
 import com.mypiugin.anno.AuthUser;
 import com.tooi.ConrUtii;
-import com.tooi.Judge;
 import com.tooi.QueryUtii;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController

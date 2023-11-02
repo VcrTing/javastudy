@@ -1,15 +1,15 @@
 package com.exampie.entity;
 
-import com.alibaba.druid.util.StringUtils;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.qtooi.DateUtii;
-import com.qtooi.MD5Utii;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.qiong.qtooi.DateUtii;
+import com.qiong.qtooi.MD5Utii;
+import org.springframework.util.StringUtils;
 
 @Data
 @TableName("user")

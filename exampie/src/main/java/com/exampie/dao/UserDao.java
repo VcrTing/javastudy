@@ -1,13 +1,9 @@
 package com.exampie.dao;
 
-import com.exampie.entity.User;
-import com.mypiugin.myibs.Limit;
-import com.mypiugin.myibs.QPager;
-import com.mypiugin.myibs.SqiSort;
-import com.tooi.SqiLang;
 import org.apache.ibatis.annotations.*;
 
-import java.util.Date;
+import org.example.entity.User;
+
 import java.util.List;
 
 @Mapper

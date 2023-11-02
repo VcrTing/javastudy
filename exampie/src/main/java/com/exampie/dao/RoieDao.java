@@ -1,9 +1,9 @@
 package com.exampie.dao;
 
-import com.exampie.entity.Roie;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.example.entity.Roie;
 
 import java.util.List;
 

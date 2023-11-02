@@ -1,19 +1,14 @@
 package com.exampie.serv;
 
-import com.alibaba.druid.util.StringUtils;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.exampie.dao.UserDao;
-import com.exampie.entity.User;
 import com.mypiugin.myibs.Limit;
 import com.qtooi.DateUtii;
 import com.qtooi.MD5Utii;
-import com.tooi.Judge;
+import org.example.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
