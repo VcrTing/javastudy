@@ -27,4 +27,8 @@ public class HomeConr {
         return mp;
     }
 
+    @GetMapping("/iogin/success")
+    public String succ() {
+        return "登录 成功";
+    }
 }

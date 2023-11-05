@@ -21,5 +21,7 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 
         // HttpStatus sts = HttpStatus.BAD_REQUEST;
         response.getWriter().write("{\"code\": \"500\", \"msg\": \"登录失败\"}");
+
+        response.sendRedirect("/login");
     }
 }

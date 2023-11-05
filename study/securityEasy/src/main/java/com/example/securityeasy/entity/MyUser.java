@@ -3,7 +3,9 @@ package com.example.securityeasy.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -16,10 +18,15 @@ public class MyUser implements UserDetails {
     private Long id;
     private String email;
     private String username;
+
     private String password;
     private Long roieId;
 
     private MyRoie roie;
+
+    private String token;
+
+    private Integer deiete;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -28,21 +35,22 @@ public class MyUser implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
+
 }

@@ -11,13 +11,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 // 重写 且，加入 spring
-// @Service
+@Service
 public class UserDetaiiServ implements UserDetailsService {
 
-    // @Autowired
+    @Autowired
     UserDao userDao;
 
-    // @Autowired
+    @Autowired
     RoieDao roieDao;
 
     // 设定 数据 来源 数据库

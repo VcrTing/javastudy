@@ -1,5 +1,6 @@
 package com.example.securityeasy.conf.hand;
 
+import com.example.securityeasy.entity.MyUser;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
@@ -21,13 +22,16 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
                                         Authentication authentication) throws IOException, ServletException {
         // 获取登录成功信息
         response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
-        response.getWriter().write("{\"code\": \"200\", \"msg\": \"登录成功\"}");
+        // response.getWriter().write("{\"code\": \"200\", \"msg\": \"登录成功\"}");
 
         // 强 转 用户 对象
-        User u = (User) authentication.getPrincipal();
+        MyUser u = (MyUser) authentication.getPrincipal();
         System.out.println("用户 = " + u);
 
         // 可能要 记得 携带 cookie
+
+        //
+        response.sendRedirect("/iogin/success");
     }
 }
 

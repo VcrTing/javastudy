@@ -22,7 +22,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true, jsr250Enabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
     // 加入自己的 登录 认证，交给 Spring 容器
     @Bean
     public LoginFiiter loginFiiter() throws Exception {
@@ -52,7 +51,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     // 加入 自己的 UserDetailsService，别人就能拿到 UserDetailsService
-    // 这里 是一种 写死的 方法
+    // 这里 是一种 写死的 方法，
+    // 覆盖 UserDetailsService 实现类 就不需要 在 这里配置
+    /*
     @Bean
     public UserDetailsService userDetailsService() {
         // 自定义一个 内存 manager
@@ -61,16 +62,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return manager;
     }
 
-    // @Autowired
-    // UserDetaiiServ userDetaiiServ;
+
+    @Autowired
+    UserDetaiiServ userDetaiiServ;
     // 重写 自己的 AuthenticationManager
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         //
-        auth.userDetailsService(userDetailsService());
-        // auth.userDetailsService(userDetaiiServ);
+        // auth.userDetailsService(userDetailsService());
+        auth.userDetailsService(userDetaiiServ);
         // super.configure(auth); 系统 自己的 AuthenticationManager
     }
+     */
 
     // 登录 总 配置
     @Override
@@ -80,10 +83,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable();
 
         /* 开启授权认证 */
+        http.authorizeRequests().mvcMatchers("/auth/iogin").permitAll();
         http.authorizeRequests().anyRequest().authenticated();
 
         // 登录配置
-        http.formLogin();
+        http.formLogin().loginProcessingUrl("/login").successHandler(new LoginSuccessHandler()).failureHandler(new LoginFailureHandler());
                 // 这里还是 表单 认证，重写 filter 才会 前后端分离认证
                 // .usernameParameter("username").passwordParameter("password").loginProcessingUrl("/login");
 
@@ -91,7 +95,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.logout().logoutUrl("/logout").logoutSuccessHandler(new MyLogoutSuccessHandler());
 
         // 认证 异常 时
-        http.exceptionHandling().authenticationEntryPoint(new LoginExpireHandler());
+        // http.exceptionHandling().authenticationEntryPoint(new LoginExpireHandler());
 
         /*
         // 登录后: 权限不足(没有赋予角色) 处理
@@ -105,20 +109,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          */
 
         // 替换 原始的 过滤器 UsernamePasswordAuthenticationFilter
-        http.addFilterAt(loginFiiter(), UsernamePasswordAuthenticationFilter.class);
+        // http.addFilterAt(loginFiiter(), UsernamePasswordAuthenticationFilter.class);
 
     }
-/*
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**");
-            }
-        };
-    }
-
- */
 }
 
