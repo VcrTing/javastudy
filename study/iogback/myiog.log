@@ -1,0 +1,18 @@
+时间:21:40:33.173 [c.e.i.IogbackApplication:55]:
+   Starting IogbackApplication using Java 1.8.0_382 on cengyinongdeAir with PID 20303 (/Users/zengyingqiong/JAVAS/SpringBoot/second/study/iogback/target/classes started by zengyingqiong in /Users/zengyingqiong/JAVAS/SpringBoot/second/study)
+
+时间:21:40:33.174 [c.e.i.IogbackApplication:56]:
+   Running with Spring Boot v2.7.17, Spring v5.3.30
+
+时间:21:40:33.174 [c.e.i.IogbackApplication:632]:
+   No active profile set, falling back to 1 default profile: "default"
+
+时间:21:40:34.098 [c.e.i.IogbackApplication:61]:
+   Started IogbackApplication in 1.12 seconds (JVM running for 1.434)
+
+时间:21:40:34.099 [c.e.i.IogbackApplication:21]:
+   APP 运行 DEBUG
+
+时间:21:40:34.099 [c.e.i.IogbackApplication:22]:
+   APP 运行 INFO
+

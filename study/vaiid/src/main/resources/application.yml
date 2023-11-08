@@ -1,0 +1,34 @@
+
+spring:
+  application:
+    name: securityEasy
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://42.192.15.218:3306/exampie?serverTimezone=UTC
+    username: qiong
+    password: qiong
+    type: com.alibaba.druid.pool.DruidDataSource
+  # REDIS
+  redis:
+    host: 42.192.15.218 #localhost #
+    port: 6379
+    client-type: lettuce
+    lettuce:
+      pool:
+        max-active: 8
+  security:
+    user:
+      name: admin
+      password: admin
+      roles: ONE
+server:
+  port: 80
+
+springdoc:
+  packages-to-scan: com.example.vaiid.moduie
+  swagger-ui:
+    path: /docs
+    enabled: true
+  api-docs:
+    path: /v3/api-docs
+    enabled: true
